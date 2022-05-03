@@ -1,0 +1,60 @@
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/AikaV3rm/UiLib/master/Lib.lua')))()
+
+local w = library:CreateWindow("Automation") 
+
+local c = w:CreateFolder("Clicking")
+
+local b = w:CreateFolder("Misc") 
+
+b:Button("Auto buy food",function()
+    while wait(12.5) do
+    local args = {
+    [1] = "CatFood"
+}
+
+game:GetService("ReplicatedStorage").Buy:InvokeServer(unpack(args))
+end
+
+    end)
+b:Button("Collect all SmallCashDrop",function()
+    local Head = game.Players.LocalPlayer.Character.Head
+while wait() do
+for i, v in pairs(game:GetService("Workspace"):GetDescendants(SmallCashDrop)) do
+    if v.Name == "TouchInterest" and v.Parent then
+        firetouchinterest(Head, v.Parent, 0)
+        wait(0.4)
+        firetouchinterest(Head, v.Parent, 1)
+        end
+end
+end
+    end)
+
+b:Label("Auto feed(Soon)",{
+    TextSize = 25; -- Self Explaining
+    TextColor = Color3.fromRGB(255,255,255); -- Self Explaining
+    BgColor = Color3.fromRGB(69,69,69); -- Self Explaining
+    
+}) 
+
+c:Button("AutoMoney",function()
+    warn("Working")
+    while wait() do
+    --Too much folders didn't waste time so i made it fire all clickdetectors
+for i,v in pairs(workspace:GetDescendants()) do
+			if v:IsA("ClickDetector") then
+				fireclickdetector(v)
+			end
+end
+end
+end)
+
+b:Toggle("Toggle",function(bool)
+    shared.toggle = bool
+    print(shared.toggle)
+end)
+
+b:DestroyGui()
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Adding autofeed soon", -- Required
+	Text = "Also collecting too fast gets you killed(unknown reason)", 
+})
